@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B2154F152A5A1A7E00D2BBA8 /* DessertRecipesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2154F142A5A1A7E00D2BBA8 /* DessertRecipesApp.swift */; };
-		B2154F172A5A1A7E00D2BBA8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2154F162A5A1A7E00D2BBA8 /* ContentView.swift */; };
+		B2154F172A5A1A7E00D2BBA8 /* HomeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2154F162A5A1A7E00D2BBA8 /* HomeListView.swift */; };
 		B2154F192A5A1A7F00D2BBA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2154F182A5A1A7F00D2BBA8 /* Assets.xcassets */; };
 		B2154F1C2A5A1A7F00D2BBA8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2154F1B2A5A1A7F00D2BBA8 /* Preview Assets.xcassets */; };
 		B2154F262A5A1A7F00D2BBA8 /* DessertRecipesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2154F252A5A1A7F00D2BBA8 /* DessertRecipesTests.swift */; };
@@ -17,6 +17,9 @@
 		B2154F402A5A208400D2BBA8 /* Modals.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2154F3F2A5A208400D2BBA8 /* Modals.swift */; };
 		B2154F422A5A224C00D2BBA8 /* RecipesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2154F412A5A224C00D2BBA8 /* RecipesService.swift */; };
 		B2399F682A5B62F80058E552 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2399F672A5B62F80058E552 /* Extensions.swift */; };
+		B2399F6B2A5BA1630058E552 /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2399F6A2A5BA1630058E552 /* RecipeDetailView.swift */; };
+		B288DC862A5C868B007021E5 /* HomeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B288DC852A5C868B007021E5 /* HomeListViewModel.swift */; };
+		B288DC882A5C8DBC007021E5 /* RecipeDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B288DC872A5C8DBC007021E5 /* RecipeDetailsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +42,7 @@
 /* Begin PBXFileReference section */
 		B2154F112A5A1A7E00D2BBA8 /* DessertRecipes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DessertRecipes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2154F142A5A1A7E00D2BBA8 /* DessertRecipesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DessertRecipesApp.swift; sourceTree = "<group>"; };
-		B2154F162A5A1A7E00D2BBA8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B2154F162A5A1A7E00D2BBA8 /* HomeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListView.swift; sourceTree = "<group>"; };
 		B2154F182A5A1A7F00D2BBA8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B2154F1B2A5A1A7F00D2BBA8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B2154F212A5A1A7F00D2BBA8 /* DessertRecipesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DessertRecipesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +53,9 @@
 		B2154F3F2A5A208400D2BBA8 /* Modals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modals.swift; sourceTree = "<group>"; };
 		B2154F412A5A224C00D2BBA8 /* RecipesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesService.swift; sourceTree = "<group>"; };
 		B2399F672A5B62F80058E552 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		B2399F6A2A5BA1630058E552 /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
+		B288DC852A5C868B007021E5 /* HomeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListViewModel.swift; sourceTree = "<group>"; };
+		B288DC872A5C8DBC007021E5 /* RecipeDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,10 +106,10 @@
 		B2154F132A5A1A7E00D2BBA8 /* DessertRecipes */ = {
 			isa = PBXGroup;
 			children = (
+				B2154F142A5A1A7E00D2BBA8 /* DessertRecipesApp.swift */,
 				B2399F662A5B62CF0058E552 /* Helpers */,
 				B2154F3E2A5A207200D2BBA8 /* Networking */,
-				B2154F142A5A1A7E00D2BBA8 /* DessertRecipesApp.swift */,
-				B2154F162A5A1A7E00D2BBA8 /* ContentView.swift */,
+				B2399F692A5BA12F0058E552 /* Views */,
 				B2154F182A5A1A7F00D2BBA8 /* Assets.xcassets */,
 				B2154F1A2A5A1A7F00D2BBA8 /* Preview Content */,
 			);
@@ -150,6 +156,17 @@
 				B2399F672A5B62F80058E552 /* Extensions.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B2399F692A5BA12F0058E552 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B2154F162A5A1A7E00D2BBA8 /* HomeListView.swift */,
+				B288DC852A5C868B007021E5 /* HomeListViewModel.swift */,
+				B2399F6A2A5BA1630058E552 /* RecipeDetailView.swift */,
+				B288DC872A5C8DBC007021E5 /* RecipeDetailsViewModel.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,9 +299,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2154F172A5A1A7E00D2BBA8 /* ContentView.swift in Sources */,
 				B2399F682A5B62F80058E552 /* Extensions.swift in Sources */,
+				B288DC882A5C8DBC007021E5 /* RecipeDetailsViewModel.swift in Sources */,
+				B2399F6B2A5BA1630058E552 /* RecipeDetailView.swift in Sources */,
+				B288DC862A5C868B007021E5 /* HomeListViewModel.swift in Sources */,
 				B2154F422A5A224C00D2BBA8 /* RecipesService.swift in Sources */,
+				B2154F172A5A1A7E00D2BBA8 /* HomeListView.swift in Sources */,
 				B2154F402A5A208400D2BBA8 /* Modals.swift in Sources */,
 				B2154F152A5A1A7E00D2BBA8 /* DessertRecipesApp.swift in Sources */,
 			);
