@@ -1,6 +1,6 @@
 import Foundation
 
-struct DessertRecipesResponse: Decodable {
+struct DessertRecipesResponse: Decodable, Equatable {
     let recipes: [Recipe]
     
     enum CodingKeys: String, CodingKey {
@@ -8,7 +8,7 @@ struct DessertRecipesResponse: Decodable {
     }
 }
 
-struct Recipe: Decodable, Identifiable {
+struct Recipe: Decodable, Equatable, Identifiable {
     let name: String
     let thumbnail: String
     let id: String
