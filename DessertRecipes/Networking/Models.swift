@@ -22,7 +22,18 @@ struct Recipe: Decodable, Identifiable {
 }
 
 struct RecipeDetailsResponse: Decodable {
-    let details: [RecipeDetails]
+    let details: RecipeDetails
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let detailsResponse = try container.decode([RecipeDetails].self, forKey: .details)
+        
+        guard let firstDetail = detailsResponse.first else {
+            throw NetworkErrors.failedToDecode
+        }
+        
+        self.details = firstDetail
+    }
     
     enum CodingKeys: String, CodingKey {
         case details = "meals"
@@ -56,17 +67,18 @@ struct RecipeDetails: Decodable {
         let container = try decoder.container(keyedBy: DynamicCodingKeys.self)
         // We are decoding if present in order to fail gracefully if there happens to be any changes to the known keys that go live before we can update the code here.
         // Make sure to make them all decodeIfPresent and create an enum for any errors that may occur
-        self.area = try container.decodeIfPresent(String.self, forKey: DynamicCodingKeys(stringValue: knownKeys.area.rawValue)!) ?? "Opps couldn't find an area. Try pulling to refresh"
-        self.id = try container.decode(String.self, forKey: DynamicCodingKeys(stringValue: knownKeys.id.rawValue)!)
-        self.instructions = try container.decode(String.self, forKey: DynamicCodingKeys(stringValue:knownKeys.instructions.rawValue)!)
-        self.name = try container.decode(String.self, forKey: DynamicCodingKeys(stringValue: knownKeys.name.rawValue)!)
-        self.youtubeURLString = try container.decode(String.self, forKey: DynamicCodingKeys(stringValue: knownKeys.youtubeURLString.rawValue)!)
+        // Check the api to make sure these aren't
+        self.area = try container.decodeIfPresent(String.self, forKey: DynamicCodingKeys(stringValue: KnownKeys.area.rawValue)!) ?? "Oops couldn't find an area. Try pulling to refresh"
+        self.id = try container.decode(String.self, forKey: DynamicCodingKeys(stringValue: KnownKeys.id.rawValue)!)
+        self.instructions = try container.decode(String.self, forKey: DynamicCodingKeys(stringValue:KnownKeys.instructions.rawValue)!)
+        self.name = try container.decode(String.self, forKey: DynamicCodingKeys(stringValue: KnownKeys.name.rawValue)!)
+        self.youtubeURLString = try container.decode(String.self, forKey: DynamicCodingKeys(stringValue: KnownKeys.youtubeURLString.rawValue)!)
         
         var ingredientDictionary = [String: Ingredient.Builder]()
         
         for key in container.allKeys {
             
-            if key.stringValue.hasPrefix("strIngredient"), let id = Self.getIDFromIngredient(with: key.stringValue) {
+            if key.stringValue.hasPrefix("strIngredient"), let id = Self.getIDFromIngredient(with: key.stringValue, type: .ingredientName) {
                 let ingredientName = try? container.decode(String.self, forKey: DynamicCodingKeys(stringValue: key.stringValue)!)
                 
                 if let builder = ingredientDictionary[id] {
@@ -74,7 +86,7 @@ struct RecipeDetails: Decodable {
                 } else {
                     ingredientDictionary[id] = Ingredient.Builder(name: ingredientName)
                 }
-            } else if key.stringValue.hasPrefix("strMeasure"), let id = Self.getIDFromIngredient(with: key.stringValue) {
+            } else if key.stringValue.hasPrefix("strMeasure"), let id = Self.getIDFromIngredient(with: key.stringValue, type: .measurement) {
                 let measurement = try? container.decode(String.self, forKey: DynamicCodingKeys(stringValue: key.stringValue)!)
                 if let builder = ingredientDictionary[id] {
                     builder.setMeasurement(measurement)
@@ -85,10 +97,9 @@ struct RecipeDetails: Decodable {
         }
         
         self.ingredients = ingredientDictionary.compactMap { $0.value.build() }
-        print(ingredients)
     }
     
-    enum knownKeys: String {
+    enum KnownKeys: String {
         case area = "strArea"
         case id = "idMeal"
         case instructions = "strInstructions"
@@ -96,12 +107,18 @@ struct RecipeDetails: Decodable {
         case youtubeURLString = "strYoutube"
     }
     
-    private static func getIDFromIngredient(with key: String) -> String? {
+    private enum IngredientComponentType {
+        case ingredientName
+        case measurement
+    }
+    
+    private static func getIDFromIngredient(with key: String, type: IngredientComponentType) -> String? {
         var ingredientRegex: Regex<(Substring, Substring)>?
         
-        if key.hasPrefix("strIngredient") {
+        switch type {
+        case .ingredientName:
             ingredientRegex = /^strIngredient(\d+)$/
-        } else if key.hasPrefix("strMeasure") {
+        case .measurement:
             ingredientRegex = /^strMeasure(\d+)$/
         }
         

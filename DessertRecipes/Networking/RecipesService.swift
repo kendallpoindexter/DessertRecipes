@@ -25,12 +25,7 @@ struct RecipesService {
         
         let recipeDetailsResponse = try await fetchValue(from: url, with: RecipeDetailsResponse.self)
         
-        guard let recipeDetails = recipeDetailsResponse.details.first else {
-            // Does this really count as failed to decode here
-            throw NetworkErrors.failedToDecode
-        }
-        
-        return recipeDetails
+        return recipeDetailsResponse.details
     }
     
     private func fetchValue<T: Decodable>(from url: URL, with type: T.Type) async throws -> T {
