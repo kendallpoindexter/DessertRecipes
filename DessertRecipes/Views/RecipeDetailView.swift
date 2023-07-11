@@ -1,30 +1,37 @@
-
 import SwiftUI
 
 struct RecipeDetailView: View {
-   // let id: String
     @StateObject var viewModel: RecipeDetailsViewModel
     let service = RecipesService()
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading) {
-                Text("Instructions")
-                    .font(.title)
-                    .bold()
-                Spacer()
-                Text(viewModel.instructions)
-                Spacer()
-                Text("Ingredients")
-                    .font(.title)
-                    .bold()
-                Spacer()
-                ForEach(viewModel.ingredients) { ingredient in
-                    Text(ingredient.measurement + " " + ingredient.name)
-                    Divider()
+        Group {
+            switch viewModel.viewState {
+            case .idle, .loading:
+                ProgressView()
+            case .loaded:
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        Text("Instructions")
+                            .font(.title)
+                            .bold()
+                        Spacer()
+                        Text(viewModel.instructions)
+                        Spacer()
+                        Text("Ingredients")
+                            .font(.title)
+                            .bold()
+                        Spacer()
+                        ForEach(viewModel.ingredients) { ingredient in
+                            Text(ingredient.measurement + " " + ingredient.name)
+                            Divider()
+                        }
+                    }
+                    .padding()
                 }
+            case .error:
+                Text("Present an empty error view")
             }
-            .padding()
         }
         .task {
             await viewModel.getRecipeDetails()

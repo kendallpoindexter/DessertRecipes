@@ -5,6 +5,7 @@ import Foundation
     private let id: String
    
     @Published private var recipeDetails: RecipeDetails?
+    @Published private(set) var viewState = ViewState.idle
     
     //Make sure to better handle these optional values and error handling
     var ingredients: [Ingredient] {
@@ -25,11 +26,14 @@ import Foundation
     }
     
     func getRecipeDetails() async {
+        viewState = .loading
+        
         do {
             let detailsResponse = try await service.fetchRecipeDetails(with: id)
             recipeDetails = detailsResponse
+            viewState = .loaded
         } catch {
-            // Handle Error
+            viewState = .error
         }
     }
 }
