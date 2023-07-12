@@ -1,13 +1,11 @@
 import Foundation
 
 @MainActor final class RecipeDetailsViewModel: ObservableObject {
-    private let service = RecipesService()
-    private let recipe: Recipe
-   
     @Published private var recipeDetails: RecipeDetails?
     @Published private(set) var viewState = ViewState.idle
+    private let recipe: Recipe
+    private let service: RecipesServiceable
     
-    //Make sure to better handle these optional values and error handling
     var imageURLString: String {
         recipe.thumbnail
     }
@@ -24,8 +22,9 @@ import Foundation
         return recipeDetails?.name ?? ""
     }
     
-    init(recipe: Recipe) {
+    init(recipe: Recipe, service: RecipesServiceable = RecipesService()) {
         self.recipe = recipe
+        self.service = service
     }
     
     func getRecipeDetails() async {

@@ -6,7 +6,17 @@ enum NetworkErrors: Error {
     case invalidURL
 }
 
-struct RecipesService {
+protocol RecipesServiceable {
+    func fetchRecipes() async throws -> DessertRecipesResponse
+    func fetchRecipeDetails(with id: String) async throws -> RecipeDetails
+}
+
+struct RecipesService: RecipesServiceable {
+    let urlSession: NetworkSession
+    
+    init(urlSession: NetworkSession = URLSession.shared) {
+        self.urlSession = urlSession
+    }
     
     func fetchRecipes() async throws -> DessertRecipesResponse {
         guard let url = constructURL(with: .recipes, query: "Dessert") else {
@@ -29,7 +39,7 @@ struct RecipesService {
     }
     
     private func fetchValue<T: Decodable>(from url: URL, with type: T.Type) async throws -> T {
-        let (data, response) = try await URLSession.shared.data(from: url)
+        let (data, response) = try await urlSession.getData(from: url)
         
         guard let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.isHttpResponseValid else {
             throw NetworkErrors.invalidHttpResponse
