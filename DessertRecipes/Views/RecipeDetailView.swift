@@ -1,10 +1,25 @@
 import NukeUI
 import SwiftUI
 
+/// Recipe detail view.
 struct RecipeDetailView: View {
+    
+    /// View model for handling state and data.
     @StateObject var viewModel: RecipeDetailsViewModel
+    
+    /// Recipe service for fetching data.
     let service = RecipesService()
     
+    /// Body view displaying UI based on view model state:
+    ///
+    /// - .idle, .loading: Show ProgressView
+    ///
+    /// - .loaded: Show scrollable view with:
+    ///   - Use LazyImage to load recipe image 
+    ///   - Display recipe instructions 
+    ///   - Display ingredients list
+    ///
+    /// - .error: Show error text and retry button
     var body: some View {
         Group {
             switch viewModel.viewState {
@@ -47,9 +62,13 @@ struct RecipeDetailView: View {
                 .buttonStyle(.bordered)
             }
         }
+        
+        /// Fetches recipe details when view appears. 
         .task {
             await viewModel.getRecipeDetails()
         }
+        
+        /// Navigation title and styling
         .navigationTitle(viewModel.name)
         .navigationBarTitleDisplayMode(.inline)
     }

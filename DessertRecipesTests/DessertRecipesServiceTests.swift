@@ -105,16 +105,14 @@ final class RecipesServiceTests: XCTestCase {
     
     func testFetchRecipeDetailsReturnsRecipeDetailsUponSuccess() async throws {
         let service = RecipesService(urlSession: session)
-        let expectedRecipeDetails = RecipeDetails(area: "", id: "", ingredients: [], instructions: "", name: "Test", youtubeURLString: "")
+        let expectedRecipeDetails = RecipeDetails(id: "", ingredients: [], instructions: "", name: "Test")
         let data = """
         {
           "meals": [
             {
               "idMeal": "",
               "strMeal": "Test",
-              "strArea": "",
               "strInstructions": "",
-              "strYoutube": "",
               "ingredients": [
                     {
                         }
@@ -141,9 +139,7 @@ final class RecipesServiceTests: XCTestCase {
             {
               "idMeal": "",
               "strMeal": "Test",
-              "strArea": "",
               "strInstructions": "",
-              "strYoutube": "",
               "ingredients": [
                     {
                         }
@@ -171,9 +167,7 @@ final class RecipesServiceTests: XCTestCase {
             {
               "idMeal": "",
               "strMeal": "Test",
-              "strArea": "",
               "strInstructions": "",
-              "strYoutube": "",
               "ingredients": [
                     {
                         }
@@ -203,9 +197,7 @@ final class RecipesServiceTests: XCTestCase {
               "testkey": ""
               "idMeal": "",
               "strMeal": "Test",
-              "strArea": "",
               "strInstructions": "",
-              "strYoutube": "",
               "ingredients": [
                     {
                         }
