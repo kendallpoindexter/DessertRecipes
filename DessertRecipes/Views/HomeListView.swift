@@ -1,3 +1,4 @@
+import NukeUI
 import SwiftUI
 
 struct HomeListView: View {
@@ -11,22 +12,35 @@ struct HomeListView: View {
                 ProgressView()
             case .loaded:
                 List(viewModel.recipes) { recipe in
-                    NavigationLink(recipe.name, value: recipe.id)
+                    NavigationLink(value: recipe) {
+                        HStack {
+                            LazyImage(url: URL(string: recipe.thumbnail)) { state in
+                                if let image = state.image {
+                                    image.resizable().scaledToFit().frame(width: 50, height: 50)
+                                }
+                            }
+                            Text(recipe.name)
+                        }
+                    }
                 }
             case .error:
-                Text("Empty table view state")
+                Text("Oops! Looking for recipes? Please try again.")
+                Button("Retry") {
+                    Task {
+                        await viewModel.getRecipes()
+                    }
+                }
             }
         }
         .task {
              await viewModel.getRecipes()
         }
-        .navigationDestination(for: String.self) { id in
-            RecipeDetailView(viewModel: RecipeDetailsViewModel(id: id))
+        .navigationDestination(for: Recipe.self) { recipe in
+            RecipeDetailView(viewModel: RecipeDetailsViewModel(recipe: recipe))
         }
         .navigationTitle("Desserts")
     }
 }
-
 
 struct HomeListView_Previews: PreviewProvider {
     static var previews: some View {
