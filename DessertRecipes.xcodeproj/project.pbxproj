@@ -24,7 +24,9 @@
 		B250FF952A5D2C7700132E62 /* RecipesServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B250FF942A5D2C7700132E62 /* RecipesServiceMock.swift */; };
 		B288DC862A5C868B007021E5 /* HomeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B288DC852A5C868B007021E5 /* HomeListViewModel.swift */; };
 		B288DC882A5C8DBC007021E5 /* RecipeDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B288DC872A5C8DBC007021E5 /* RecipeDetailsViewModel.swift */; };
-		B2F6AFBD2A5E0816004A9416 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = B2F6AFBC2A5E0816004A9416 /* NukeUI */; };
+		B2B78FAB2A5EF4C9000C7CAB /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = B2B78FAA2A5EF4C9000C7CAB /* NukeUI */; };
+		B2C43A652A5E6EA700E8AA0A /* RecipeDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2C43A642A5E6EA700E8AA0A /* RecipeDetailsViewModelTests.swift */; };
+		B2F6AFBF2A5E566E004A9416 /* HomeListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2F6AFBE2A5E566E004A9416 /* HomeListViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 		B250FF942A5D2C7700132E62 /* RecipesServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesServiceMock.swift; sourceTree = "<group>"; };
 		B288DC852A5C868B007021E5 /* HomeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListViewModel.swift; sourceTree = "<group>"; };
 		B288DC872A5C8DBC007021E5 /* RecipeDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewModel.swift; sourceTree = "<group>"; };
+		B2C43A642A5E6EA700E8AA0A /* RecipeDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailsViewModelTests.swift; sourceTree = "<group>"; };
+		B2F6AFBE2A5E566E004A9416 /* HomeListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2F6AFBD2A5E0816004A9416 /* NukeUI in Frameworks */,
+				B2B78FAB2A5EF4C9000C7CAB /* NukeUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +144,8 @@
 				B2154F252A5A1A7F00D2BBA8 /* DessertRecipesServiceTests.swift */,
 				B250FF922A5D27C100132E62 /* NetworkSessionMock.swift */,
 				B250FF942A5D2C7700132E62 /* RecipesServiceMock.swift */,
+				B2F6AFBE2A5E566E004A9416 /* HomeListViewModelTests.swift */,
+				B2C43A642A5E6EA700E8AA0A /* RecipeDetailsViewModelTests.swift */,
 			);
 			path = DessertRecipesTests;
 			sourceTree = "<group>";
@@ -200,7 +206,7 @@
 			);
 			name = DessertRecipes;
 			packageProductDependencies = (
-				B2F6AFBC2A5E0816004A9416 /* NukeUI */,
+				B2B78FAA2A5EF4C9000C7CAB /* NukeUI */,
 			);
 			productName = DessertRecipes;
 			productReference = B2154F112A5A1A7E00D2BBA8 /* DessertRecipes.app */;
@@ -275,7 +281,7 @@
 			);
 			mainGroup = B2154F082A5A1A7E00D2BBA8;
 			packageReferences = (
-				B2F6AFBB2A5E0816004A9416 /* XCRemoteSwiftPackageReference "Nuke" */,
+				B2B78FA92A5EF4C9000C7CAB /* XCRemoteSwiftPackageReference "Nuke" */,
 			);
 			productRefGroup = B2154F122A5A1A7E00D2BBA8 /* Products */;
 			projectDirPath = "";
@@ -337,8 +343,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2154F262A5A1A7F00D2BBA8 /* DessertRecipesServiceTests.swift in Sources */,
+				B2C43A652A5E6EA700E8AA0A /* RecipeDetailsViewModelTests.swift in Sources */,
 				B250FF932A5D27C100132E62 /* NetworkSessionMock.swift in Sources */,
 				B250FF952A5D2C7700132E62 /* RecipesServiceMock.swift in Sources */,
+				B2F6AFBF2A5E566E004A9416 /* HomeListViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -657,7 +665,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		B2F6AFBB2A5E0816004A9416 /* XCRemoteSwiftPackageReference "Nuke" */ = {
+		B2B78FA92A5EF4C9000C7CAB /* XCRemoteSwiftPackageReference "Nuke" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kean/Nuke";
 			requirement = {
@@ -668,9 +676,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		B2F6AFBC2A5E0816004A9416 /* NukeUI */ = {
+		B2B78FAA2A5EF4C9000C7CAB /* NukeUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = B2F6AFBB2A5E0816004A9416 /* XCRemoteSwiftPackageReference "Nuke" */;
+			package = B2B78FA92A5EF4C9000C7CAB /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = NukeUI;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -2,13 +2,12 @@
 import Foundation
 
 class NetworkSessionMock: NetworkSession {
-    var data: Data?
-    var response: URLResponse?
+    var mockResult: (Data, URLResponse)?
     
     func getData(from url: URL) async throws -> (Data, URLResponse) {
-        guard let data = data, let response = response else {
-            throw NetworkErrors.failedToFetchData
+        guard let mockResult else {
+             fatalError("getData was called but mock result was nil")
         }
-        return (data, response)
+        return mockResult
     }
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-struct DessertRecipesResponse: Decodable, Equatable {
+struct DessertRecipesResponse: Codable, Equatable {
     let recipes: [Recipe]
     
     enum CodingKeys: String, CodingKey {
@@ -8,21 +8,24 @@ struct DessertRecipesResponse: Decodable, Equatable {
     }
 }
 
-struct Recipe: Decodable, Hashable, Identifiable {
+struct Recipe: Codable, Hashable, Identifiable {
     let name: String
     let thumbnail: String
     let id: String
     
     enum CodingKeys: String, CodingKey {
         case name = "strMeal"
-        // Make sure to pass this image into the actual details or retrieve it from cache
         case thumbnail = "strMealThumb"
         case id = "idMeal"
     }
 }
 
-struct RecipeDetailsResponse: Decodable {
+struct RecipeDetailsResponse: Codable {
     let details: RecipeDetails
+    
+    init(details: RecipeDetails) {
+        self.details = details
+    }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -40,7 +43,7 @@ struct RecipeDetailsResponse: Decodable {
     }
 }
 
-struct RecipeDetails: Decodable {
+struct RecipeDetails: Codable, Equatable {
     let area: String
     let id: String
     let ingredients: [Ingredient]
@@ -63,12 +66,18 @@ struct RecipeDetails: Decodable {
         }
     }
     
+    init(area: String, id: String, ingredients: [Ingredient], instructions: String, name: String, youtubeURLString: String) {
+        self.area = area
+        self.id = id
+        self.ingredients = ingredients
+        self.instructions = instructions
+        self.name = name
+        self.youtubeURLString = youtubeURLString
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: DynamicCodingKeys.self)
-        // We are decoding if present in order to fail gracefully if there happens to be any changes to the known keys that go live before we can update the code here.
-        // Make sure to make them all decodeIfPresent and create an enum for any errors that may occur
-        // Check the api to make sure these aren't
-        self.area = try container.decodeIfPresent(String.self, forKey: DynamicCodingKeys(stringValue: KnownKeys.area.rawValue)!) ?? "Oops couldn't find an area. Try pulling to refresh"
+        self.area = try container.decode(String.self, forKey: DynamicCodingKeys(stringValue: KnownKeys.area.rawValue)!)
         self.id = try container.decode(String.self, forKey: DynamicCodingKeys(stringValue: KnownKeys.id.rawValue)!)
         self.instructions = try container.decode(String.self, forKey: DynamicCodingKeys(stringValue:KnownKeys.instructions.rawValue)!)
         self.name = try container.decode(String.self, forKey: DynamicCodingKeys(stringValue: KnownKeys.name.rawValue)!)
@@ -130,7 +139,7 @@ struct RecipeDetails: Decodable {
     }
 }
 
-struct Ingredient: Decodable, Identifiable {
+struct Ingredient: Codable, Equatable, Identifiable {
     let id: UUID
     let name: String
     let measurement: String

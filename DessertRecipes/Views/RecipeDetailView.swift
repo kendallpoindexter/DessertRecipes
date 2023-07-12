@@ -57,7 +57,10 @@ struct RecipeDetailView: View {
 
 struct RecipeDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = RecipeDetailsViewModel(recipe: (Recipe(name: "Test", thumbnail: "https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg", id: "52900")))
-        RecipeDetailView(viewModel: viewModel)
+        let viewModel = RecipeDetailsViewModel(recipe: (Recipe(name: "Test", thumbnail: "", id: "52900")))
+        
+        NavigationStack {
+            RecipeDetailView(viewModel: viewModel)
+        }
     }
 }

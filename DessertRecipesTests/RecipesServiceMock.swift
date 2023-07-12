@@ -2,40 +2,32 @@
 import Foundation
 
 class RecipesServiceMock: RecipesServiceable {
-    var recipesResponse: DessertRecipesResponse?
-    var recipeDetails: RecipeDetails?
-    var url: URL?
-    var response: URLResponse?
+    var mockFetchRecipesResult: Result<DessertRecipesResponse, NetworkErrors>?
+    var mockFetchRecipeDetailsResult: Result<RecipeDetails, NetworkErrors>?
     
     func fetchRecipes() async throws -> DessertRecipes.DessertRecipesResponse {
-        guard let _ = url else {
-            throw NetworkErrors.invalidURL
+        guard let mockFetchRecipesResult else {
+            fatalError("If fetchRecipes is called we should have a mockFetchRecipesResult")
         }
         
-        guard let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.isHttpResponseValid else {
-            throw NetworkErrors.invalidHttpResponse
+        switch mockFetchRecipesResult {
+        case let .success(recipesResponse):
+            return recipesResponse
+        case let .failure(error):
+            throw error
         }
-        
-        guard let recipesResponse = recipesResponse else {
-            throw NetworkErrors.failedToDecode
-        }
-        
-        return recipesResponse
     }
     
     func fetchRecipeDetails(with id: String) async throws -> DessertRecipes.RecipeDetails {
-        guard let _ = url else {
-            throw NetworkErrors.invalidURL
+        guard let mockFetchRecipeDetailsResult else {
+            fatalError("If fetchRecipeDetails is called we should have a mockFetchRecipeDetailsResult")
         }
         
-        guard let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.isHttpResponseValid else {
-            throw NetworkErrors.invalidHttpResponse
+        switch mockFetchRecipeDetailsResult {
+        case let .success(recipeDetails):
+            return recipeDetails
+        case let .failure(error):
+            throw error
         }
-        
-        guard let recipeDetails = recipeDetails else {
-            throw NetworkErrors.failedToDecode
-        }
-        
-        return recipeDetails
     }
 }

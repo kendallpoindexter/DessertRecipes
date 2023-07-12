@@ -6,7 +6,6 @@ import Foundation
     private let recipe: Recipe
     private let service: RecipesServiceable
     
-    //Make sure to better handle these optional values and error handling
     var imageURLString: String {
         recipe.thumbnail
     }
@@ -23,7 +22,7 @@ import Foundation
         return recipeDetails?.name ?? ""
     }
     
-    init(recipe: String, service: RecipesServiceable = RecipesService()) {
+    init(recipe: Recipe, service: RecipesServiceable = RecipesService()) {
         self.recipe = recipe
         self.service = service
     }

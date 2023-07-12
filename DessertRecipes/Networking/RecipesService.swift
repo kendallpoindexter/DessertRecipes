@@ -2,7 +2,6 @@ import Foundation
 
 enum NetworkErrors: Error {
     case failedToDecode
-    case failedToFetchData
     case invalidHttpResponse
     case invalidURL
 }
