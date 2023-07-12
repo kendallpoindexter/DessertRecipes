@@ -3,10 +3,13 @@ import Foundation
 @MainActor final class RecipeDetailsViewModel: ObservableObject {
     @Published private var recipeDetails: RecipeDetails?
     @Published private(set) var viewState = ViewState.idle
-    private let id: String
+    private let recipe: Recipe
     private let service: RecipesServiceable
     
     //Make sure to better handle these optional values and error handling
+    var imageURLString: String {
+        recipe.thumbnail
+    }
     var ingredients: [Ingredient] {
         guard let ingredients = recipeDetails?.ingredients else { return [] }
         return ingredients.sorted { $0.name < $1.name }
@@ -20,8 +23,8 @@ import Foundation
         return recipeDetails?.name ?? ""
     }
     
-    init(id: String, service: RecipesServiceable = RecipesService()) {
-        self.id = id
+    init(recipe: String, service: RecipesServiceable = RecipesService()) {
+        self.recipe = recipe
         self.service = service
     }
     
@@ -29,7 +32,7 @@ import Foundation
         viewState = .loading
         
         do {
-            let detailsResponse = try await service.fetchRecipeDetails(with: id)
+            let detailsResponse = try await service.fetchRecipeDetails(with: recipe.id)
             recipeDetails = detailsResponse
             viewState = .loaded
         } catch {

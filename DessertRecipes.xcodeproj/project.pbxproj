@@ -24,6 +24,7 @@
 		B250FF952A5D2C7700132E62 /* RecipesServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = B250FF942A5D2C7700132E62 /* RecipesServiceMock.swift */; };
 		B288DC862A5C868B007021E5 /* HomeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B288DC852A5C868B007021E5 /* HomeListViewModel.swift */; };
 		B288DC882A5C8DBC007021E5 /* RecipeDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B288DC872A5C8DBC007021E5 /* RecipeDetailsViewModel.swift */; };
+		B2F6AFBD2A5E0816004A9416 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = B2F6AFBC2A5E0816004A9416 /* NukeUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2F6AFBD2A5E0816004A9416 /* NukeUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +199,9 @@
 			dependencies = (
 			);
 			name = DessertRecipes;
+			packageProductDependencies = (
+				B2F6AFBC2A5E0816004A9416 /* NukeUI */,
+			);
 			productName = DessertRecipes;
 			productReference = B2154F112A5A1A7E00D2BBA8 /* DessertRecipes.app */;
 			productType = "com.apple.product-type.application";
@@ -269,6 +274,9 @@
 				Base,
 			);
 			mainGroup = B2154F082A5A1A7E00D2BBA8;
+			packageReferences = (
+				B2F6AFBB2A5E0816004A9416 /* XCRemoteSwiftPackageReference "Nuke" */,
+			);
 			productRefGroup = B2154F122A5A1A7E00D2BBA8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -647,6 +655,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B2F6AFBB2A5E0816004A9416 /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B2F6AFBC2A5E0816004A9416 /* NukeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B2F6AFBB2A5E0816004A9416 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = NukeUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B2154F092A5A1A7E00D2BBA8 /* Project object */;
 }

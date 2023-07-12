@@ -1,3 +1,4 @@
+import NukeUI
 import SwiftUI
 
 struct RecipeDetailView: View {
@@ -12,6 +13,12 @@ struct RecipeDetailView: View {
             case .loaded:
                 ScrollView {
                     VStack(alignment: .leading) {
+                        LazyImage(url: URL(string: viewModel.imageURLString)) { state in
+                            if let image = state.image {
+                                image.resizable().aspectRatio(contentMode: .fit)
+                            }
+                        }
+                        Spacer()
                         Text("Instructions")
                             .font(.title)
                             .bold()
@@ -30,7 +37,14 @@ struct RecipeDetailView: View {
                     .padding()
                 }
             case .error:
-                Text("Present an empty error view")
+                Text("Oops! Couldn't find this recipe. Please try again.")
+                    .padding()
+                Button("Retry") {
+                    Task {
+                        await viewModel.getRecipeDetails()
+                    }
+                }
+                .buttonStyle(.bordered)
             }
         }
         .task {
@@ -43,7 +57,7 @@ struct RecipeDetailView: View {
 
 struct RecipeDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = RecipeDetailsViewModel(id: "52900")
+        let viewModel = RecipeDetailsViewModel(recipe: (Recipe(name: "Test", thumbnail: "https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg", id: "52900")))
         RecipeDetailView(viewModel: viewModel)
     }
 }

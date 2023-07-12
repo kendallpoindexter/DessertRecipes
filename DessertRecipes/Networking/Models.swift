@@ -8,7 +8,7 @@ struct DessertRecipesResponse: Decodable, Equatable {
     }
 }
 
-struct Recipe: Decodable, Equatable, Identifiable {
+struct Recipe: Decodable, Hashable, Identifiable {
     let name: String
     let thumbnail: String
     let id: String
