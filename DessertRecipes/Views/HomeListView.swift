@@ -25,11 +25,13 @@ struct HomeListView: View {
                 }
             case .error:
                 Text("Oops! Looking for recipes? Please try again.")
+                    .padding()
                 Button("Retry") {
                     Task {
                         await viewModel.getRecipes()
                     }
                 }
+                .buttonStyle(.bordered)
             }
         }
         .task {
