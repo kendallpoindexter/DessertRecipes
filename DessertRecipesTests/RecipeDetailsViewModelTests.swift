@@ -5,7 +5,7 @@ final class RecipeDetailsViewModelTests: XCTestCase {
     let service = RecipesServiceMock()
     
     func testGetRecipeDetailsUpdatesRecipeDetailsStateAndViewState() async throws {
-        let expectedRecipeDetails = RecipeDetails(area: "", id: "", ingredients: [], instructions: "", name: "Test", youtubeURLString: "")
+        let expectedRecipeDetails = RecipeDetails(id: "", ingredients: [], instructions: "", name: "Test")
         let expectedRecipe = Recipe(name: "", thumbnail: "", id: "")
         
         let viewModel = await RecipeDetailsViewModel(recipe: expectedRecipe, service: service)

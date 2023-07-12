@@ -1,10 +1,24 @@
 import NukeUI
 import SwiftUI
 
+/// Home list view showing dessert recipes.
 struct HomeListView: View {
+    
+    /// View model for handling state and data.
     @StateObject private var viewModel = HomeListViewModel()
+    
+    /// Recipe service for fetching data.
     private let service = RecipesService()
     
+    /// Body view displaying UI based on view model state:
+    ///
+    /// - .idle, .loading: Show ProgressView 
+    ///
+    /// - .loaded: Show list of recipes with navigation links:
+    ///   - Use LazyImage to load thumbnail 
+    ///   - Display recipe name
+    ///   
+    /// - .error: Show error text and retry button
     var body: some View {
         Group {
             switch viewModel.viewState {
@@ -34,9 +48,13 @@ struct HomeListView: View {
                 .buttonStyle(.bordered)
             }
         }
+        
+        /// Fetches recipes when view appears.
         .task {
-             await viewModel.getRecipes()
+            await viewModel.getRecipes()
         }
+        
+        /// Navigation to recipe detail view.
         .navigationDestination(for: Recipe.self) { recipe in
             RecipeDetailView(viewModel: RecipeDetailsViewModel(recipe: recipe))
         }
